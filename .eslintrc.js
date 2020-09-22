@@ -1,11 +1,16 @@
 module.exports = {
-  extends: ['airbnb-typescript'],
+  extends: [
+    'airbnb-typescript',
+    'plugin:jest/all'
+  ],
+  plugins: ['jest', 'modules-newline'],
   parserOptions: {
     project: './tsconfig.json',
   },
   env: {
     browser: true,
-    jest: true
+    jest: true,
+    'jest/globals': true
   },
   rules: {
     'react/jsx-props-no-spreading': 0,

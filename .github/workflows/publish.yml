@@ -1,0 +1,23 @@
+name: Publish
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Install, Build, Publish
+        uses: actions/setup-node@master
+        with:
+          node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
+      - run: yarn install
+      - run: yarn build
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
