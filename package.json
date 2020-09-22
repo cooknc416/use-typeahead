@@ -1,31 +1,53 @@
 {
   "name": "use-typeahead",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:cooknc416/use-typeahead.git",
+  "main": "dist/use-typeahead.min.js",
   "author": "Nathan Cook <cooknc416@gmail.com>",
   "license": "MIT",
   "type": "module",
+  "module": "dist/use-typeahead.es.js",
+  "types": "dist/index.d.ts",
+  "browserslist": "> 0.25%, not dead",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cooknc416/use-typeahead"
+  },
+  "keywords": [
+    "react",
+    "typeahead",
+    "search",
+    "usetypeahead"
+  ],
+  "files": [
+    "src/**/*.ts",
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "lint": "node_modules/eslint/bin/eslint.js",
     "test": "node_modules/jest/bin/jest.js --runInBand",
-    "build": "NODE_ENV=production rollup -c"
+    "build": "rm -rf dist/** && NODE_ENV=production rollup -c"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
+    "@storybook/addon-a11y": "^6.0.21",
     "@storybook/addon-actions": "^6.0.21",
     "@storybook/addon-essentials": "^6.0.21",
     "@storybook/addon-links": "^6.0.21",
+    "@storybook/addon-storysource": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "^12.1.5",
+    "@types/jest": "^26.0.14",
+    "@types/react": "^16.9.49",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "babel-loader": "^8.1.0",
     "eslint": "^7.8.1",
     "eslint-config-airbnb-typescript": "^10.0.0",
     "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.0.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-modules-newline": "^0.0.4",
     "eslint-plugin-react": "^7.20.3",
@@ -49,7 +71,5 @@
   "peerDependencies": {
     "react": "^16.13.1"
   },
-  "dependencies": {
-    "@types/jest": "^26.0.14"
-  }
+  "dependencies": {}
 }

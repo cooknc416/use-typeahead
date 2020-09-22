@@ -4,14 +4,45 @@ import {
   Story,
   Meta 
 } from '@storybook/react/types-6-0';
-
 import { Typeahead } from './Typeahead';
+import { TypeaheadConfig } from '../src/useTypeahead';
+
+const args: TypeaheadConfig = {
+  maxWidth: 0,
+  maxHeight: 200,
+  offsetX: 0,
+  offsetY: 0,
+  menuAlign: 'justify',
+  minimumCharCount: 0,
+  wrapperClass: '',
+  inputClass: '',
+  menuClass: '',
+  menuItemClass: ''
+};
 
 export default {
-  title: 'Example/Default',
-  component: Typeahead
+  title: 'Examples/UseTypeahead',
+  component: Typeahead,
+  args,
+  argTypes: {
+    menuAlign: {
+      control: {
+        type: 'inline-radio',
+        options: ['left', 'right', 'justify']
+      }
+    }
+  }
 } as Meta;
 
-const Template: Story = (args) => <Typeahead {...args} />;
+const Template: Story = (args) => <Typeahead label='Label' {...args}/>;
 
-export const CustomText = Template.bind({});
+export const NoStyles = Template.bind({});
+NoStyles.args = {
+  label: 'No Styles'
+};
+
+export const MaxHeight = Template.bind({});
+MaxHeight.args = {
+  label: 'Max Height',
+  maxHeight: 100
+};

@@ -11,6 +11,9 @@ const globals = {
   react: 'React',
 }
 
+const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx']
+const babelConfig = { extensions, runtimeHelpers: true }
+
 export default [
   {
     input: 'src/index.ts',
@@ -23,12 +26,14 @@ export default [
     },
     external,
     plugins: [
-      typescript(),
-      replace({ 'process.env.NODE_ENV': `"development"`, delimiters: ['', ''] }),
-      babel(),
+      typescript({ typescript: require("typescript") }),
+      replace({ typescript: require("typescript") }),
+      babel(babelConfig),
       externalDeps(),
       terser(),
-      size()
+      size({
+        writeFile: false
+      })
     ]
   },
   {
@@ -42,12 +47,14 @@ export default [
     },
     external,
     plugins: [
-      typescript(),
+      typescript({ typescript: require("typescript") }),
       replace({ 'process.env.NODE_ENV': `"production"`, delimiters: ['', ''] }),
-      babel(),
+      babel(babelConfig),
       externalDeps(),
       terser(),
-      size()
+      size({
+        writeFile: false
+      })
     ]
   }
 ]
