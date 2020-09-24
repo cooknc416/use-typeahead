@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Typeahead } from '../stories/Typeahead';
-import { testOptionsSmall } from '../test-utils/testOptions.js';
+import { testOptionsSmall } from '../test-utils/testOptions';
 
 describe('useTypeahead', () => {
   it('renders a basic input and typeahead', () => {

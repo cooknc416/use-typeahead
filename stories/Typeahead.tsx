@@ -4,7 +4,7 @@ import { testOptionsLarge } from '../test-utils/testOptions';
 
 interface TypeaheadProps extends TypeaheadConfig {
   options?: any[];
-  label: string;
+  label?: string;
 }
 
 export const Typeahead = (props: TypeaheadProps) => {
