@@ -64,12 +64,12 @@ const getMenuStyle = (config: TypeaheadConfig, dimensions: DOMRect, searchTerm: 
     offsetX,
     offsetY,
     menuAlign,
-    minimumCharCount = 0
+    minimumCharCount
   } = config;
   const { height } = dimensions;
 
   return {
-    display: searchTerm.length > minimumCharCount ? 'block' : 'none',
+    display: searchTerm.length > (minimumCharCount ?? 0) ? 'block' : 'none',
     position: 'absolute',
     left: menuAlign === 'left' ? (offsetX ?? 0) : 'unset',
     right: menuAlign === 'right' ? (offsetX ?? 0) : 'unset',

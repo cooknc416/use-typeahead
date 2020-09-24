@@ -7,7 +7,7 @@ import {
 import { Typeahead } from './Typeahead';
 import { TypeaheadConfig } from '../src/useTypeahead';
 
-const args: TypeaheadConfig = {
+const defaultArgs: TypeaheadConfig = {
   maxWidth: 0,
   maxHeight: 200,
   offsetX: 0,
@@ -23,7 +23,7 @@ const args: TypeaheadConfig = {
 export default {
   title: 'Examples/UseTypeahead',
   component: Typeahead,
-  args,
+  args: defaultArgs,
   argTypes: {
     menuAlign: {
       control: {
@@ -34,7 +34,12 @@ export default {
   }
 } as Meta;
 
-const Template: Story = (args) => <Typeahead label='Label' {...args}/>;
+const Template: Story = (args) => (
+  <Typeahead
+    label='Label'
+    {...args}
+  />
+);
 
 export const NoStyles = Template.bind({});
 NoStyles.args = {
