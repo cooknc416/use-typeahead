@@ -1,18 +1,20 @@
+/* eslint-disable global-require, consistent-return */
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import size from 'rollup-plugin-size';
 import externalDeps from 'rollup-plugin-peer-deps-external';
-import replace from '@rollup/plugin-replace';
 import typescript from 'rollup-plugin-typescript2';
 
-const external = ['react']
-
 const globals = {
-  react: 'React',
-}
+  react: 'React'
+};
 
-const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx']
-const babelConfig = { extensions, runtimeHelpers: true }
+const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'];
+
+const babelConfig = {
+  extensions,
+  runtimeHelpers: true 
+};
 
 export default [
   {
@@ -24,13 +26,24 @@ export default [
       sourcemap: true,
       globals
     },
-    external,
+    external: Object.keys(globals),
     plugins: [
-      typescript({ typescript: require("typescript") }),
-      replace({ typescript: require("typescript") }),
+      typescript({
+        typescript: require('typescript') 
+      }),
       babel(babelConfig),
       externalDeps(),
-      terser(),
+      terser({
+        output: {
+          comments: (node, comment) => {
+            const text = comment.value;
+            const { type } = comment;
+            if (type === 'comment2') {
+              return /@preserve|@license|@cc_on/i.test(text);
+            }
+          }
+        }
+      }),
       size({
         writeFile: false
       })
@@ -45,16 +58,27 @@ export default [
       sourcemap: true,
       globals
     },
-    external,
+    external: Object.keys(globals),
     plugins: [
-      typescript({ typescript: require("typescript") }),
-      replace({ 'process.env.NODE_ENV': `"production"`, delimiters: ['', ''] }),
+      typescript({
+        typescript: require('typescript') 
+      }),
       babel(babelConfig),
       externalDeps(),
-      terser(),
+      terser({
+        output: {
+          comments: (node, comment) => {
+            const text = comment.value;
+            const { type } = comment;
+            if (type === 'comment2') {
+              return /@preserve|@license|@cc_on/i.test(text);
+            }
+          }
+        }
+      }),
       size({
         writeFile: false
       })
     ]
   }
-]
+];
