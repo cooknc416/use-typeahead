@@ -3,23 +3,24 @@ name: Storybook
 on:
   push:
     branches: [ master ]
-    jobs:
-      build-and-deploy:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@master
-          - name: Install, Build, Deploy
-            uses: actions/setup-node@master
-            with:
-              node-version: '14'
-          - run: yarn install
-          - run: yarn build-storybook
-          - uses: jakejarvis/s3-sync-action@master
-            with:
-              args: --acl public-read --follow-symlinks --delete
-            env:
-              AWS_S3_BUCKET: ${{ secrets.STORYBOOK_BUCKET }}
-              AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-              AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-              SOURCE_DIR: 'storybook-static'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Install, Build, Deploy
+        uses: actions/setup-node@master
+        with:
+          node-version: '14'
+      - run: yarn install
+      - run: yarn build-storybook
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.STORYBOOK_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: 'storybook-static'
