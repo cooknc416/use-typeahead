@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Typeahead } from '../stories/Typeahead';
+import { TypeaheadExample } from '../stories/Typeahead';
 import { testOptionsSmall } from '../test-utils/testOptions';
 
 describe('useTypeahead', () => {
   it('renders a basic input and typeahead', () => {
     expect.assertions(1);
-    const { getByRole } = render(<Typeahead options={testOptionsSmall} />);
+    const { getByRole } = render(<TypeaheadExample options={testOptionsSmall} />);
   
     const input = getByRole('textbox');
   
@@ -16,7 +16,7 @@ describe('useTypeahead', () => {
   
   it('applys basic styles', async () => {
     expect.assertions(1);
-    const { getByRole } = render(<Typeahead options={testOptionsSmall} />);
+    const { getByRole } = render(<TypeaheadExample options={testOptionsSmall} />);
   
     const input = getByRole('textbox');
     await userEvent.type(input, 'a');
@@ -30,7 +30,7 @@ describe('useTypeahead', () => {
     const {
       getByRole,
       getAllByRole 
-    } = render(<Typeahead options={testOptionsSmall} />);
+    } = render(<TypeaheadExample options={testOptionsSmall} />);
   
     // Random lowercase letter
     const randomChar = String.fromCharCode(Math.floor(Math.random() * (122 - 97) + 97));
@@ -50,9 +50,9 @@ describe('useTypeahead', () => {
     const {
       getByRole,
       getAllByRole 
-    } = render(<Typeahead
+    } = render(<TypeaheadExample
       options={testOptionsSmall}
-      filterFn={(item, term) => !item.value.includes(term)}
+      filterFn={(item: any, term: string) => !item.value.includes(term)}
     />);
   
     // Random lowercase letter
