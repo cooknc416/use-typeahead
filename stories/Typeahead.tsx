@@ -1,26 +1,31 @@
 import React from 'react';
-import { useTypeahead, TypeaheadConfig } from '../src/useTypeahead';
+import {
+  useTypeahead,
+  TypeaheadConfig 
+} from '../src/useTypeahead';
 import { testOptionsLarge } from '../test-utils/testOptions';
 
-interface TypeaheadProps extends TypeaheadConfig {
-  options?: any[];
-  label?: string;
+export interface TypeaheadExampleProps extends TypeaheadConfig {
+  options: any[];
 }
 
-export const Typeahead = (props: TypeaheadProps) => {
-  const { options = testOptionsLarge, label, ...config } = props;
+export const TypeaheadExample = (props: TypeaheadExampleProps) => {
+  const {
+    options = testOptionsLarge,
+    ...config 
+  } = props;
+
   const {
     wrapperProps,
     inputProps,
     inputRef,
     menuProps,
-    menuItems,
-  } = useTypeahead(options, { ...config });
+    menuItems
+  } = useTypeahead(options, {
+    ...config 
+  });
+
   return (
-    <>
-    <div>
-    <label htmlFor='testId'>{label}</label>
-    </div>
     <div {...wrapperProps}>
       <input
         ref={inputRef}
@@ -31,6 +36,5 @@ export const Typeahead = (props: TypeaheadProps) => {
         {menuItems.map((opt) => <div {...opt.props}>{opt.value}</div>)}
       </div>
     </div>
-    </>
   );
 };

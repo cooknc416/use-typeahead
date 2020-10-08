@@ -3,7 +3,7 @@ import { useGetLatest } from './utilities';
 
 // ================= Types =====================
 
-export type MenuAlign = 'left' | 'right' | 'justify' | undefined;
+export type MenuAlign = 'left' | 'right' | 'justify';
 
 export interface TypeaheadConfig {
   filterFn?: (item: any, term: string) => boolean;
@@ -75,7 +75,7 @@ const getMenuStyle = (config: TypeaheadConfig, dimensions: DOMRect, searchTerm: 
     right: menuAlign === 'right' ? (offsetX ?? 0) : 'unset',
     top: height + (offsetY ?? 0),
     height: maxHeight,
-    width: getMenuWidth(menuAlign, dimensions),
+    width: getMenuWidth(menuAlign ?? 'justify', dimensions),
     maxWidth: maxWidth || 'auto',
     overflowY: 'auto'
   };
